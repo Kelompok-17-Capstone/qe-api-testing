@@ -78,14 +78,6 @@ public class APIStepDef {
                 case "randomProductDescription" -> bodyRequest.put(key, faker.lorem().sentence());
                 case "randomProductStock" -> bodyRequest.put(key, faker.random().nextInt(1, 500));
                 case "randomPrice" -> bodyRequest.put(key, faker.commerce().price());
-                case "randomImage" -> {
-                    String imagePath = "C:/Users/User/Downloads/download.jfif";
-                    File imageFile = new File(imagePath);
-
-                    RestAssured.given()
-                            .multiPart("image", imageFile, ContentType.IMAGE_JPEG.getMimeType())
-                            .post("http://54.254.218.108");
-                }
                 case "userEmail" -> bodyRequest.put(key, user.getEmail());
                 case "userPassword" -> bodyRequest.put(key, user.getPassword());
                 default -> bodyRequest.put(key, valueList.get(key));
@@ -142,5 +134,18 @@ public class APIStepDef {
     public void userVerifyStatusCodeIs(Actor actor, int statusCode) {
         Response response = SerenityRest.lastResponse();
         response.then().statusCode(statusCode).log().all();
+    }
+
+    @And("{actor} send image to {string}")
+    public void userSendImageTo(Actor actor, String path) {
+        actor.whoCan(CallAnApi.at(baseURL));
+
+        File imageFile = new File(System.getProperty("user.dir") + "/bg-presentasi mini project batch 4.png");
+        actor.attemptsTo(Post.to(path).with(request -> {
+            return request
+                    .header("Authorization", "Bearer " + user.getToken())
+                    .contentType("multipart/form-data")
+                    .multiPart("image", imageFile, ContentType.IMAGE_PNG.getMimeType());
+        }));
     }
 }
