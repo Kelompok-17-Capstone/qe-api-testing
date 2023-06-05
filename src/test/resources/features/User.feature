@@ -112,3 +112,35 @@ Feature: User Capstone API
     Given User call an api "/favorite/1" with method "DELETE" with payload below
     Then User verify status code is 200
     Then User verify response is match with json schema "PutUsertoMember.json"
+
+###################################################################################################
+
+  @CapsAPI @UserCaps @Product
+  Scenario: User get products
+    Given User call an api "/products" with method "GET"
+    Then User verify status code is 200
+    Then User verify response is match with json schema "GetProductUser.json"
+
+  @CapsAPI @UserCaps @Product
+  Scenario: User get products terbaru
+    Given User call an api "/products?tab=terbaru" with method "GET"
+    Then User verify status code is 200
+    Then User verify response is match with json schema "GetProductUser.json"
+
+  @CapsAPI @UserCaps @Product
+  Scenario: User get products terfavorite
+    Given User call an api "/products?tab=terfavorit" with method "GET"
+    Then User verify status code is 200
+    Then User verify response is match with json schema "GetProductUser.json"
+
+  @CapsAPI @UserCaps @Product
+  Scenario: User get products terfavorite dengan order termurah
+    Given User call an api "/products?tab=terfavorit&price=asc" with method "GET"
+    Then User verify status code is 200
+    Then User verify response is match with json schema "GetProductUser.json"
+
+  @CapsAPI @UserCaps @Product
+  Scenario: User get products terfavorite dengan order termahal
+    Given User call an api "/products?tab=terfavorit&price=desc" with method "GET"
+    Then User verify status code is 200
+    Then User verify response is match with json schema "GetProductUser.json"

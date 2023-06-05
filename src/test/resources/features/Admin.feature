@@ -105,3 +105,17 @@ Feature: Admin Capstone API
     Given User call an api "/admin/users?role=member&keyword=aryo" with method "GET"
     Then User verify status code is 200
     Then User verify response is match with json schema "GetUsers.json"
+
+  @CapsAPI @AdminCaps @Users
+  Scenario: Admin edit user by id
+    Given User call an api "/admin/users/1" with method "PUT" with payload below
+      | name | phone_number | city | province | address | status |
+      | selena | 083893421728 | tasikmalaya | Jawa Barat | jl.ngupat | member |
+    Then User verify status code is 200
+    Then User verify response is match with json schema "CreateProduct.json"
+
+  @CapsAPI @AdminCaps @Users
+  Scenario: Admin delete user by id
+    Given User call an api "/admin/users/1" with method "DELETE"
+    Then User verify status code is 200
+    Then User verify response is match with json schema "GetUsers.json"
