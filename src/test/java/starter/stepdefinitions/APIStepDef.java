@@ -80,6 +80,11 @@ public class APIStepDef {
                 case "randomPrice" -> bodyRequest.put(key, faker.commerce().price());
                 case "userEmail" -> bodyRequest.put(key, user.getEmail());
                 case "userPassword" -> bodyRequest.put(key, user.getPassword());
+                case "randomName" -> bodyRequest.put(key, faker.name());
+                case "randomPhone" -> bodyRequest.put(key, faker.phoneNumber());
+                case "randomCity" -> bodyRequest.put(key, faker.address().cityName());
+                case "randomProvince" -> bodyRequest.put(key, faker.address().state());
+                case "randomAddress" -> bodyRequest.put(key, faker.address().fullAddress());
                 default -> bodyRequest.put(key, valueList.get(key));
             }
         }
@@ -111,13 +116,13 @@ public class APIStepDef {
                 actor.attemptsTo(Get.resource(path).with(request -> request.header("Authorization", "Bearer "+ user.getToken()).log().all()));
                 break;
             case "POST":
-                actor.attemptsTo(Post.to(path));
+                actor.attemptsTo(Post.to(path).with(request -> request.header("Authorization", "Bearer "+ user.getToken()).log().all()));
                 break;
             case "PUT":
-                actor.attemptsTo(Put.to(path));
+                actor.attemptsTo(Put.to(path).with(request -> request.header("Authorization", "Bearer "+ user.getToken()).log().all()));
                 break;
             case "DELETE":
-                actor.attemptsTo(Delete.from(path));
+                actor.attemptsTo(Delete.from(path).with(request -> request.header("Authorization", "Bearer "+ user.getToken()).log().all()));
                 break;
             default:
                 throw new IllegalStateException("Unknown method");
@@ -142,6 +147,18 @@ public class APIStepDef {
 
         File imageFile = new File(System.getProperty("user.dir") + "/bg-presentasi mini project batch 4.png");
         actor.attemptsTo(Post.to(path).with(request -> {
+            return request
+                    .header("Authorization", "Bearer " + user.getToken())
+                    .contentType("multipart/form-data")
+                    .multiPart("image", imageFile, ContentType.IMAGE_PNG.getMimeType());
+        }));
+    }
+    @And("{actor} sending image to {string}")
+    public void userSendingImageTo(Actor actor, String path) {
+        actor.whoCan(CallAnApi.at(baseURL));
+
+        File imageFile = new File(System.getProperty("user.dir") + "/bg-presentasi mini project batch 4.png");
+        actor.attemptsTo(Put.to(path).with(request -> {
             return request
                     .header("Authorization", "Bearer " + user.getToken())
                     .contentType("multipart/form-data")

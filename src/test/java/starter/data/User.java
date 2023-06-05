@@ -41,6 +41,6 @@ public class User {
         this.token = token;
     }
 
-    String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJlbWFpbCI6ImFkbWluIiwiZXhwIjoxNjg1ODcwMzMwLCJyb2xlIjoiYWRtaW4iLCJ1c2VyX2lkIjoxfQ.ZMaSNQYK3NuONNr-Q0ZE21fmJK4ZCKuLN16Zob8nxw4";
+    String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJlbWFpbCI6Imlvam5tbzk4bm5kdGdkQGdtYWlsLmNvbSIsImV4cCI6MTY4NjAxNjQzNiwicm9sZSI6InJlZ3VsZXIiLCJ1c2VyX2lkIjo0fQ.u57JQg1vPgRb8YwgzQPVT1JwhVNolFP0-UWmzEIC-HY";
 
 }
