@@ -25,13 +25,21 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class APIStepDef {
 
-    String baseURL = "http://54.254.218.108";
+    String baseURL = "http://54.255.178.155";
+
+    String timestamp = Instant.now().toString(); // Generate current timestamp in UTC
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+    String formattedTimestamp = Instant.parse(timestamp).atZone(ZoneOffset.UTC).format(formatter);
 
     User user = new User();
 
@@ -76,15 +84,18 @@ public class APIStepDef {
                 }
                 case "randomProductName" -> bodyRequest.put(key, faker.commerce().productName());
                 case "randomProductDescription" -> bodyRequest.put(key, faker.lorem().sentence());
-                case "randomProductStock" -> bodyRequest.put(key, faker.random().nextInt(1, 500));
+                case "randomProductStock" -> bodyRequest.put(key, faker.random().nextInt(1, 100));
                 case "randomPrice" -> bodyRequest.put(key, faker.commerce().price());
                 case "userEmail" -> bodyRequest.put(key, user.getEmail());
                 case "userPassword" -> bodyRequest.put(key, user.getPassword());
-                case "randomName" -> bodyRequest.put(key, faker.name());
-                case "randomPhone" -> bodyRequest.put(key, faker.phoneNumber());
+                case "randomName" -> bodyRequest.put(key, faker.name().fullName());
+                case "randomPhone" -> bodyRequest.put(key, faker.phoneNumber().subscriberNumber(12));
                 case "randomCity" -> bodyRequest.put(key, faker.address().cityName());
                 case "randomProvince" -> bodyRequest.put(key, faker.address().state());
                 case "randomAddress" -> bodyRequest.put(key, faker.address().fullAddress());
+                case "retypepass" -> bodyRequest.put(key, user.getPassword());
+                case "randomArrive" -> bodyRequest.put("arrived_at", formattedTimestamp);
+
                 default -> bodyRequest.put(key, valueList.get(key));
             }
         }
@@ -138,7 +149,7 @@ public class APIStepDef {
     @Then("{actor} verify status code is {int}")
     public void userVerifyStatusCodeIs(Actor actor, int statusCode) {
         Response response = SerenityRest.lastResponse();
-        response.then().statusCode(statusCode).log().all();
+        response.then().log().all().statusCode(statusCode);
     }
 
     @And("{actor} send image to {string}")
@@ -160,9 +171,104 @@ public class APIStepDef {
         File imageFile = new File(System.getProperty("user.dir") + "/bg-presentasi mini project batch 4.png");
         actor.attemptsTo(Put.to(path).with(request -> {
             return request
-                    .header("Authorization", "Bearer " + user.getToken())
+                    .header("Authorization", "Bearer " + user.getToken1())
                     .contentType("multipart/form-data")
                     .multiPart("image", imageFile, ContentType.IMAGE_PNG.getMimeType());
         }));
+    }
+    @Given("{actor} call an user api {string} with method {string} with payload below")
+    public void callUserApi(Actor actor, String path, String method, DataTable table) {
+        actor.whoCan(CallAnApi.at(baseURL));
+
+        // Create request body json instance
+        JSONObject bodyRequest = new JSONObject();
+
+
+        // Get headers
+        List<List<String>> rowsList = table.asLists(String.class);
+        List<String> headerList = rowsList.get(0);
+
+        // Get values
+        List<Map<String, String>> rowsMap = table.asMaps(String.class, String.class);
+        Map<String, String> valueList = rowsMap.get(0);
+
+        // Loop on every values and set value with key from header to request body
+        for (int i = 0; i < valueList.size(); i++) {
+            Faker faker = new Faker(new Locale("in-ID"));
+
+            String key = headerList.get(i);
+
+            // check if value correspond to random syntax
+            switch (valueList.get(key)) {
+                case "randomEmail" -> {
+                    String randomEmail = faker.internet().emailAddress();
+                    bodyRequest.put(key, randomEmail);
+                    user.setEmail(randomEmail);
+                }
+                case "randomPassword" -> {
+                    String randomPassword = faker.internet().password();
+                    bodyRequest.put(key, randomPassword);
+                    user.setPassword(randomPassword);
+                }
+                case "randomFullname" -> {
+                    String randomFullname = faker.name().fullName();
+                    bodyRequest.put(key, randomFullname);
+                    user.setFullName(randomFullname);
+                }
+                case "randomProductName" -> bodyRequest.put(key, faker.commerce().productName());
+                case "randomProductDescription" -> bodyRequest.put(key, faker.lorem().sentence());
+                case "randomProductStock" -> bodyRequest.put(key, faker.random().nextInt(1, 100));
+                case "randomPrice" -> bodyRequest.put(key, faker.commerce().price());
+                case "userEmail" -> bodyRequest.put(key, user.getEmail());
+                case "userPassword" -> bodyRequest.put(key, user.getPassword());
+                case "randomName" -> bodyRequest.put(key, faker.name().fullName());
+                case "randomPhone" -> bodyRequest.put(key, faker.phoneNumber().subscriberNumber(12));
+                case "randomCity" -> bodyRequest.put(key, faker.address().cityName());
+                case "randomProvince" -> bodyRequest.put(key, faker.address().state());
+                case "randomAddress" -> bodyRequest.put(key, faker.address().fullAddress());
+                case "retypepass" -> bodyRequest.put(key, user.getPassword());
+
+                default -> bodyRequest.put(key, valueList.get(key));
+            }
+        }
+
+        switch (method) {
+            case "GET":
+                actor.attemptsTo(Get.resource(path).with(request -> request.header("Authorization", "Bearer "+ user.getToken1()).log().all()));
+                break;
+            case "POST":
+                actor.attemptsTo(Post.to(path).with(request -> request.body(bodyRequest).header("Authorization", "Bearer "+ user.getToken1()).log().all()));
+                break;
+            case "PUT":
+                actor.attemptsTo(Put.to(path).with(request -> request.body(bodyRequest).header("Authorization", "Bearer "+ user.getToken1()).log().all()));
+                break;
+            case "DELETE":
+                actor.attemptsTo(Delete.from(path).with(request -> request.header("Authorization", "Bearer "+ user.getToken1()).log().all()));
+                break;
+            default:
+                throw new IllegalStateException("Unknown method");
+        }
+    }
+
+    @Given("{actor} call an user api {string} with method {string}")
+    public void callUserApi(Actor actor, String path, String method) {
+        actor.whoCan(CallAnApi.at(baseURL));
+
+        switch (method) {
+            case "GET":
+                actor.attemptsTo(Get.resource(path).with(request -> request.header("Authorization", "Bearer "+ user.getToken1()).log().all()));
+                break;
+            case "POST":
+                actor.attemptsTo(Post.to(path).with(request -> request.header("Authorization", "Bearer "+ user.getToken1()).log().all()));
+                break;
+            case "PUT":
+                actor.attemptsTo(Put.to(path).with(request -> request.header("Authorization", "Bearer "+ user.getToken1()).log().all()));
+                break;
+            case "DELETE":
+                actor.attemptsTo(Delete.from(path).with(request -> request.header("Authorization", "Bearer "+ user.getToken1()).log().all()));
+                break;
+            default:
+                throw new IllegalStateException("Unknown method");
+        }
     }
 }

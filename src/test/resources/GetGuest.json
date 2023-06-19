@@ -1,0 +1,32 @@
+{
+  "data": {
+    "saldo": 0,
+    "Products": [
+      {
+        "name": "Ergonomic Rubber Wallet",
+        "image": "https://capstone-kelompok17.s3.ap-southeast-1.amazonaws.com/Untitled.jpg"
+      },
+      {
+        "name": "Ergonomic Rubber Wallet",
+        "image": "https://capstone-kelompok17.s3.ap-southeast-1.amazonaws.com/Untitled.jpg"
+      },
+      {
+        "name": "Keyboard hitam",
+        "image": "https://capstone-kelompok17.s3.ap-southeast-1.amazonaws.com/Untitled.jpg"
+      },
+      {
+        "name": "Keyboard hitam",
+        "image": "https://capstone-kelompok17.s3.ap-southeast-1.amazonaws.com/Untitled.jpg"
+      },
+      {
+        "name": "Keyboard hitam",
+        "image": "https://capstone-kelompok17.s3.ap-southeast-1.amazonaws.com/Untitled.jpg"
+      },
+      {
+        "name": "Keyboard hitam",
+        "image": "https://capstone-kelompok17.s3.ap-southeast-1.amazonaws.com/Untitled.jpg"
+      }
+    ]
+  },
+  "message": "Success get home"
+}

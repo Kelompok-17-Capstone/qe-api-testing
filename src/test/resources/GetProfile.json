@@ -17,7 +17,24 @@
       "type": "string"
     },
     "address": {
-      "type": "string"
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "address": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "address"
+          ]
+        }
+      ]
     },
     "image": {
       "type": "string"
