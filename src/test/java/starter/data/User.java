@@ -25,9 +25,9 @@ public class User {
         this.retype_password = retype_password;
     }
 
-    String email = "yari@yahoo.com";
-    String password = "oxtkgjvcs";
-    String retype_password = "oxtkgjvcs";
+    String email = "kiki.santoso@yahoo.com";
+    String password = "u62myhcnvcx9ujw";
+    String retype_password = "u62myhcnvcx9ujw";
 
     public void setRetype_password(String retype_password) {
         this.retype_password = retype_password;
@@ -41,7 +41,7 @@ public class User {
         this.token = token;
     }
 
-    String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJlbWFpbCI6ImFkbWluIiwiZXhwIjoxNjg3MjE4MTE2LCJyb2xlIjoiYWRtaW4iLCJ1c2VyX2lkIjoxfQ.aBKePkWMa4j0CQa_MXoLuYrWcbGmBJlpTno54jymDZg";
+    String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJlbWFpbCI6ImFkbWluIiwiZXhwIjoxNjg3Mzg0MDUwLCJyb2xlIjoiYWRtaW4iLCJ1c2VyX2lkIjoxfQ.QrTuL333IxkMoOmQ-h2bTG_G36vJtRF3Kxdo4u_pPhA";
 
     public String getToken1() {
         return token1;
@@ -51,5 +51,5 @@ public class User {
         this.token1 = token1;
     }
 
-    String token1 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJlbWFpbCI6InlhcmlAeWFob28uY29tIiwiZXhwIjoxNjg3MjA4NDc3LCJyb2xlIjoibWVtYmVyIiwidXNlcl9pZCI6NH0.0njR2brCge2cmRPQTU7mNxAdF84H5Wme1CZTqsJzJgg";
+    String token1 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJlbWFpbCI6Imtpa2kuc2FudG9zb0B5YWhvby5jb20iLCJleHAiOjE2ODczODQzMzgsInJvbGUiOiJyZWd1bGVyIiwidXNlcl9pZCI6NDJ9.Au52holtPgplEzVMgjADOxlaMQehYDjOmGQMOiLSVnc";
 }

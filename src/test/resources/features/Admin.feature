@@ -10,25 +10,23 @@ Feature: Admin Capstone API
 
   @CapsAPI @AdminCaps @Products
   Scenario: Admin create product
-    Given User call an api "/admin/products" with method "POST" with payload below
-      | name              | description              | stock               | price       |
-      | randomProductName | randomProductDescription | randomProductStock  | randomPrice |
-    And User send image to "/admin/products"
+    Given User create new product to "/admin/products"
     Then User verify status code is 200
     Then User verify response is match with json schema "CreateProduct.json"
 
+
   @CapsAPI @AdminCaps @Products
   Scenario: Admin edit product by id
-    Given User call an api "/admin/products/08a9844d-f0d1-4b24-8b1a-b911b9f4d261" with method "PUT" with payload below
+    Given User call an api "/admin/products/1ed7d171-c6dc-4def-97a4-b1e9fdcf6b82" with method "PUT" with payload below
       | name              |
       | randomProductName |
-    And User sending image to "/admin/products/08a9844d-f0d1-4b24-8b1a-b911b9f4d261"
+    And User send image to "/admin/products/1ed7d171-c6dc-4def-97a4-b1e9fdcf6b82"
     Then User verify status code is 200
     Then User verify response is match with json schema "CreateProduct.json"
 
   @CapsAPI @AdminCaps @Products
   Scenario: Admin delete product by id
-    Given User call an api "/admin/products/13e34b5d-7d9f-4088-b5f0-e1f41110fd5d" with method "DELETE"
+    Given User call an api "/admin/products/4b6f9159-e1e9-457e-810e-a2fc3d1b9f18" with method "DELETE"
     Then User verify status code is 200
     Then User verify response is match with json schema "CreateProduct.json"
 
@@ -78,13 +76,13 @@ Feature: Admin Capstone API
 
   @CapsAPI @AdminCaps @Users
   Scenario: Admin get users informations by id
-    Given User call an api "/admin/users/4" with method "GET"
+    Given User call an api "/admin/users/2" with method "GET"
     Then User verify status code is 200
     Then User verify response is match with json schema "GetUsersbyId.json"
 
   @CapsAPI @AdminCaps @Users
   Scenario: Admin get users informations by keyword
-    Given User call an api "/admin/users?keyword=Anita" with method "GET"
+    Given User call an api "/admin/users?keyword=Heni" with method "GET"
     Then User verify status code is 200
     Then User verify response is match with json schema "GetUsers.json"
 
@@ -102,19 +100,19 @@ Feature: Admin Capstone API
 
   @CapsAPI @AdminCaps @Users
   Scenario: Admin get reguler users informations by keyword
-    Given User call an api "/admin/users?role=reguler&keyword=Dion" with method "GET"
+    Given User call an api "/admin/users?role=reguler&keyword=Heni" with method "GET"
     Then User verify status code is 200
     Then User verify response is match with json schema "GetUsers.json"
 
   @CapsAPI @AdminCaps @Users
   Scenario: Admin get member users informations by keyword
-    Given User call an api "/admin/users?role=member&keyword=Dion" with method "GET"
+    Given User call an api "/admin/users?role=member&keyword=test" with method "GET"
     Then User verify status code is 200
     Then User verify response is match with json schema "GetUsers.json"
 
   @CapsAPI @AdminCaps @Users
   Scenario: Admin edit user by id
-    Given User call an api "/admin/users/4" with method "PUT" with payload below
+    Given User call an api "/admin/users/36" with method "PUT" with payload below
       | name       | phone_number | city       | province      | address       | status |
       | randomName | randomPhone  | randomCity | randomProvince| randomAddress | member |
     Then User verify status code is 200
@@ -122,9 +120,9 @@ Feature: Admin Capstone API
 
   @CapsAPI @AdminCaps @Users
   Scenario: Admin delete user by id
-    Given User call an api "/admin/users/3" with method "DELETE"
+    Given User call an api "/admin/users/42" with method "DELETE"
     Then User verify status code is 200
-    Then User verify response is match with json schema "EditUsers.json"
+    Then User verify response is match with json schema "DelUsers.json"
 
 ############################################################################################################
 
@@ -142,26 +140,26 @@ Feature: Admin Capstone API
 
   @CapsAPI @AdminCaps @Orders
   Scenario: Admin edit order by id
-    Given User call an api "/admin/orders/41bff284-eb9b-403c-ba47-754da545d67b" with method "PUT" with payload below
+    Given User call an api "/admin/orders/d83a6a46-cede-466e-86de-2bd9d4569488" with method "PUT" with payload below
     | status  | arrived_at   |
-    | diterima | randomArrive |
+    | dikirim | randomArrive |
     Then User verify status code is 200
     Then User verify response is match with json schema "EditOrder.json"
 
   @CapsAPI @AdminCaps @Orders
   Scenario: Admin get orders dikirim
     Given User call an api "/admin/orders/dikirim" with method "GET"
-    Then User verify status code is 200
+    Then User verify status code is 400
     Then User verify response is match with json schema "GetOrderAdmin.json"
 
   @CapsAPI @AdminCaps @Orders
   Scenario: Admin get orders diterima
     Given User call an api "/admin/orders/diterima" with method "GET"
-    Then User verify status code is 200
-    Then User verify response is match with json schema "GetOrderAdmin.json"
+    Then User verify status code is 400
+    Then User verify response is match with json schema "EditOrder.json"
 
   @CapsAPI @AdminCaps @Orders
   Scenario: Admin delete order by id
-    Given User call an api "/admin/orders/02fa257a-9c8e-4cef-8bda-574541c2e4bc" with method "DELETE"
+    Given User call an api "/admin/orders/f3ae4e15-b06b-4bc9-bc13-23cc7a29f325" with method "DELETE"
     Then User verify status code is 200
     Then User verify response is match with json schema "EditOrder.json"

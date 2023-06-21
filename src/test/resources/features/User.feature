@@ -72,7 +72,7 @@ Feature: User Capstone API
 
   @CapsAPI @UserCaps @Profil
   Scenario: User update address
-    Given User call an user api "/profile/address/8" with method "PUT" with payload below
+    Given User call an user api "/profile/address/25" with method "PUT" with payload below
       | city       | province       | address        |
       | randomCity | randomProvince | randomAddress  |
     Then User verify status code is 200
@@ -80,7 +80,7 @@ Feature: User Capstone API
 
   @CapsAPI @UserCaps @Profil
   Scenario: User delete address
-    Given User call an user api "/profile/address/9" with method "DELETE"
+    Given User call an user api "/profile/address/26" with method "DELETE"
     Then User verify status code is 200
     Then User verify response is match with json schema "PutUsertoMember.json"
 
@@ -89,8 +89,8 @@ Feature: User Capstone API
   @CapsAPI @UserCaps @Cart
   Scenario: User add cart
     Given User call an user api "/cart" with method "POST" with payload below
-    | product_id                           | quantity |
-    | 03d2d93d-3d1a-40e3-a2b8-4e1db3831f2b | 1        |
+    | product_id                           | quantity    |
+    | 1b48941d-e124-4914-a4e5-f6e7c37daf34 | product_qty |
     Then User verify status code is 200
     Then User verify response is match with json schema "PutUsertoMember.json"
 
@@ -102,15 +102,15 @@ Feature: User Capstone API
 
   @CapsAPI @UserCaps @Cart
   Scenario: User update qty item by id
-    Given User call an user api "/cart/13" with method "PUT" with payload below
-      | quantity |
-      | 2        |
+    Given User call an user api "/cart/18" with method "PUT" with payload below
+      | quantity    |
+      | product_qty |
     Then User verify status code is 200
     Then User verify response is match with json schema "PutUsertoMember.json"
 
   @CapsAPI @UserCaps @Cart
   Scenario: User delete item on cart by id
-    Given User call an user api "/cart/13" with method "DELETE"
+    Given User call an user api "/cart/18" with method "DELETE"
     Then User verify status code is 200
     Then User verify response is match with json schema "PutUsertoMember.json"
 
@@ -120,7 +120,7 @@ Feature: User Capstone API
   Scenario: User add favorite product
     Given User call an user api "/favorite" with method "POST" with payload below
     | product_id                           |
-    | 03d2d93d-3d1a-40e3-a2b8-4e1db3831f2b |
+    | 1b48941d-e124-4914-a4e5-f6e7c37daf34 |
     Then User verify status code is 201
     Then User verify response is match with json schema "PutUsertoMember.json"
 
@@ -132,7 +132,7 @@ Feature: User Capstone API
 
   @CapsAPI @UserCaps @Favorite
   Scenario: User delete favorite product
-    Given User call an user api "/favorite/17" with method "DELETE"
+    Given User call an user api "/favorite/20" with method "DELETE"
     Then User verify status code is 200
     Then User verify response is match with json schema "PutUsertoMember.json"
 
@@ -170,7 +170,7 @@ Feature: User Capstone API
 
   @CapsAPI @UserCaps @Product
   Scenario: User get products details
-    Given User call an user api "/products/03d2d93d-3d1a-40e3-a2b8-4e1db3831f2b" with method "GET"
+    Given User call an user api "/products/256ad242-7d39-402f-a3b0-85d3bacab2cc" with method "GET"
     Then User verify status code is 200
     Then User verify response is match with json schema "GetProductDetails.json"
 
@@ -179,8 +179,8 @@ Feature: User Capstone API
   @CapsAPI @UserCaps @Orders
   Scenario: User create orders
     Given User call an user api "/orders" with method "POST" with payload below
-    | address       | product_id                           | quantity |
-    | randomAddress | 13e34b5d-7d9f-4088-b5f0-e1f41110fd5d | 1        |
+    | address       | product_id                           | quantity    | coin | cart  |
+    | randomAddress | 1b48941d-e124-4914-a4e5-f6e7c37daf34 | product_qty | true | false |
     Then User verify status code is 200
     Then User verify response is match with json schema "PutUsertoMember.json"
 
@@ -195,10 +195,10 @@ Feature: User Capstone API
   @CapsAPI @UserCaps @Balance
   Scenario: User top up balance
     Given User call an user api "/topup" with method "POST" with payload below
-    | total  |
-    | 100000 |
+    | total   |
+    | balance |
     Then User verify status code is 200
-    Then User verify response is match with json schema "GetProductUser.json"
+    Then User verify response is match with json schema "PutUsertoMember.json"
 
   @CapsAPI @UserCaps @Balance
   Scenario: User get balance
@@ -224,19 +224,19 @@ Feature: User Capstone API
 
   @CapsAPI @UserCaps @Notif
   Scenario: User get notifications by id
-    Given User call an user api "/notifications/6" with method "GET"
+    Given User call an user api "/notifications/51" with method "GET"
     Then User verify status code is 200
     Then User verify response is match with json schema "GetNotifbyID.json"
 
   @CapsAPI @UserCaps @Notif
   Scenario: User update notifications
-    Given User call an user api "/notifications/status/6" with method "PUT"
+    Given User call an user api "/notifications/status/45" with method "PUT"
     Then User verify status code is 200
     Then User verify response is match with json schema "PutUsertoMember.json"
 
   @CapsAPI @UserCaps @Notif
   Scenario: User delete notifications
-    Given User call an user api "/notifications/6" with method "DELETE"
+    Given User call an user api "/notifications/46" with method "DELETE"
     Then User verify status code is 200
     Then User verify response is match with json schema "PutUsertoMember.json"
 

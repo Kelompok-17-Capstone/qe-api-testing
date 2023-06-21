@@ -84,7 +84,7 @@ public class APIStepDef {
                 }
                 case "randomProductName" -> bodyRequest.put(key, faker.commerce().productName());
                 case "randomProductDescription" -> bodyRequest.put(key, faker.lorem().sentence());
-                case "randomProductStock" -> bodyRequest.put(key, faker.random().nextInt(1, 100));
+                case "randomProductStock" -> bodyRequest.put(key, faker.random().nextInt(1, 100).toString());
                 case "randomPrice" -> bodyRequest.put(key, faker.commerce().price());
                 case "userEmail" -> bodyRequest.put(key, user.getEmail());
                 case "userPassword" -> bodyRequest.put(key, user.getPassword());
@@ -95,7 +95,7 @@ public class APIStepDef {
                 case "randomAddress" -> bodyRequest.put(key, faker.address().fullAddress());
                 case "retypepass" -> bodyRequest.put(key, user.getPassword());
                 case "randomArrive" -> bodyRequest.put("arrived_at", formattedTimestamp);
-
+                case "balance"-> bodyRequest.put(key, 1000000);
                 default -> bodyRequest.put(key, valueList.get(key));
             }
         }
@@ -227,6 +227,9 @@ public class APIStepDef {
                 case "randomProvince" -> bodyRequest.put(key, faker.address().state());
                 case "randomAddress" -> bodyRequest.put(key, faker.address().fullAddress());
                 case "retypepass" -> bodyRequest.put(key, user.getPassword());
+                case "randomArrive" -> bodyRequest.put("arrived_at", formattedTimestamp);
+                case "balance"-> bodyRequest.put(key, 1000000);
+                case "product_qty" -> bodyRequest.put(key, 1);
 
                 default -> bodyRequest.put(key, valueList.get(key));
             }
@@ -270,5 +273,27 @@ public class APIStepDef {
             default:
                 throw new IllegalStateException("Unknown method");
         }
+    }
+    @Given("{actor} create new product to {string}")
+    public void userCreateNewProductTo(Actor actor, String path) {
+        actor.whoCan(CallAnApi.at(baseURL));
+
+        Faker faker = new Faker();
+
+        Integer RandomPrice = faker.random().nextInt(1000, 10000);
+        String RandomName = faker.commerce().productName();
+        String RandomDesc = faker.lorem().sentence();
+        Integer RandomStock = faker.random().nextInt(1, 100);
+
+        actor.attemptsTo(Post.to(path).with(request -> {
+            return request
+                    .header("Authorization", "Bearer " + user.getToken()).log().all()
+                    .contentType("multipart/form-data")
+                    .multiPart("price", RandomPrice)
+                    .multiPart("name", RandomName)
+                    .multiPart("description", RandomDesc)
+                    .multiPart("stock", RandomStock)
+                    .multiPart("image", new File(System.getProperty("user.dir") + "/bg-presentasi mini project batch 4.png"), ContentType.IMAGE_PNG.getMimeType());
+        }));
     }
 }
