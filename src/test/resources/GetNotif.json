@@ -1,0 +1,90 @@
+
+
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "created_at": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "is_read": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "id",
+            "created_at",
+            "text",
+            "is_read"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "created_at": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "is_read": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "id",
+            "created_at",
+            "text",
+            "is_read"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "created_at": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "is_read": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "id",
+            "created_at",
+            "text",
+            "is_read"
+          ]
+        }
+      ]
+    },
+    "message": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "data",
+    "message"
+  ]
+}
+

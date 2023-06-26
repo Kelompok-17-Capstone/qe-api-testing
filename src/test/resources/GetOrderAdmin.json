@@ -1,0 +1,150 @@
+
+
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "message": {
+      "type": "string"
+    },
+    "orders": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "address": {
+              "type": "string"
+            },
+            "product": {
+              "type": "string"
+            },
+            "total_quantity": {
+              "type": "integer"
+            },
+            "total_price": {
+              "type": "integer"
+            },
+            "order_at": {
+              "type": "string"
+            },
+            "arrived_at": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "address",
+            "product",
+            "total_quantity",
+            "total_price",
+            "order_at",
+            "arrived_at",
+            "status"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "address": {
+              "type": "string"
+            },
+            "product": {
+              "type": "string"
+            },
+            "total_quantity": {
+              "type": "integer"
+            },
+            "total_price": {
+              "type": "integer"
+            },
+            "order_at": {
+              "type": "string"
+            },
+            "arrived_at": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "address",
+            "product",
+            "total_quantity",
+            "total_price",
+            "order_at",
+            "arrived_at",
+            "status"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "address": {
+              "type": "string"
+            },
+            "product": {
+              "type": "string"
+            },
+            "total_quantity": {
+              "type": "integer"
+            },
+            "total_price": {
+              "type": "integer"
+            },
+            "order_at": {
+              "type": "string"
+            },
+            "arrived_at": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "address",
+            "product",
+            "total_quantity",
+            "total_price",
+            "order_at",
+            "arrived_at",
+            "status"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "message",
+    "orders"
+  ]
+}
+

@@ -1,0 +1,138 @@
+
+
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "message": {
+      "type": "string"
+    },
+    "products": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "stock": {
+              "type": "integer"
+            },
+            "price": {
+              "type": "integer"
+            },
+            "image": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "favorit": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "description",
+            "stock",
+            "price",
+            "image",
+            "status",
+            "favorit"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "stock": {
+              "type": "integer"
+            },
+            "price": {
+              "type": "integer"
+            },
+            "image": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "favorit": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "description",
+            "stock",
+            "price",
+            "image",
+            "status",
+            "favorit"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "stock": {
+              "type": "integer"
+            },
+            "price": {
+              "type": "integer"
+            },
+            "image": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "favorit": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "description",
+            "stock",
+            "price",
+            "image",
+            "status",
+            "favorit"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "message",
+    "products"
+  ]
+}
+

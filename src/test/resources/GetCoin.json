@@ -1,0 +1,97 @@
+
+
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "history": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "total": {
+              "type": "integer"
+            },
+            "status": {
+              "type": "string"
+            },
+            "created_at": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "total",
+            "status",
+            "created_at"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "total": {
+              "type": "integer"
+            },
+            "status": {
+              "type": "string"
+            },
+            "created_at": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "total",
+            "status",
+            "created_at"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "total": {
+              "type": "integer"
+            },
+            "status": {
+              "type": "string"
+            },
+            "created_at": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "total",
+            "status",
+            "created_at"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "total": {
+              "type": "integer"
+            },
+            "status": {
+              "type": "string"
+            },
+            "created_at": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "total",
+            "status",
+            "created_at"
+          ]
+        }
+      ]
+    },
+    "message": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "history",
+    "message"
+  ]
+}
+

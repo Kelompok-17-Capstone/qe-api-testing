@@ -1,0 +1,20 @@
+{
+  "data": {
+    "id": 3,
+    "user_id": 4,
+    "detail_cart_item": [
+      {
+        "id": 13,
+        "cart_item_id": 3,
+        "quantity": 1,
+        "product": {
+          "id": "13e34b5d-7d9f-4088-b5f0-e1f41110fd5d",
+          "name": "Keyboard hitam",
+          "price": 50000,
+          "image": "https://capstone-kelompok17.s3.ap-southeast-1.amazonaws.com/Untitled.jpg"
+        }
+      }
+    ]
+  },
+  "message": "Cart retrieved successfully"
+}
